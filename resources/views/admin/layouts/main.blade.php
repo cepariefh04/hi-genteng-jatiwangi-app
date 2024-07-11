@@ -67,5 +67,69 @@
     <script src="{{ asset('vendor/sb-admin/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('vendor/sb-admin/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+    <script>
+      function formatRupiah(angka) {
+        if (angka != null) {
+          return 'Rp' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+        return '';
+      }
+      var hargaElement = document.getElementById('harga');
+      var harga = hargaElement.dataset.harga;
+
+      hargaElement.textContent = formatRupiah(harga);
+
+      function previewImage() {
+        const image = document.querySelector('#photo');
+        const imgPreview = document.querySelector('.img-preview');
+        imgPreview.style.display = 'block';
+
+        const ofReader = new FileReader();
+        ofReader.readAsDataURL(image.files[0]);
+
+        ofReader.onload = function(oFREvent) {
+          imgPreview.src = oFREvent.target.result;
+        }
+      }
+
+      function previewTitleLogo() {
+        const image = document.querySelector('#title_logo');
+        const imgPreview = document.querySelector('.title-logo-preview');
+        imgPreview.style.display = 'block';
+
+        const ofReader = new FileReader();
+        ofReader.readAsDataURL(image.files[0]);
+
+        ofReader.onload = function(oFREvent) {
+          imgPreview.src = oFREvent.target.result;
+        }
+      }
+
+      function previewNavbarLogo() {
+        const image = document.querySelector('#navbar_logo');
+        const imgPreview = document.querySelector('.navbar-logo-preview');
+        imgPreview.style.display = 'block';
+
+        const ofReader = new FileReader();
+        ofReader.readAsDataURL(image.files[0]);
+
+        ofReader.onload = function(oFREvent) {
+          imgPreview.src = oFREvent.target.result;
+        }
+      }
+
+      function previewHero() {
+        const image = document.querySelector('#hero');
+        const imgPreview = document.querySelector('.hero-preview');
+        imgPreview.style.display = 'block';
+
+        const ofReader = new FileReader();
+        ofReader.readAsDataURL(image.files[0]);
+
+        ofReader.onload = function(oFREvent) {
+          imgPreview.src = oFREvent.target.result;
+        }
+      }
+    </script>
 </body>
 </html>

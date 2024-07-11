@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -14,7 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
+        // return Product::get();
+        $products = Product::with('category')->get();
 
         return view('admin.dashboard.produk.index', [
             'products' => $products
@@ -28,7 +31,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.dashboard.produk.create');
+        return view('admin.dashboard.produk.create', [
+            'categories' => ProductCategory::all()
+        ]);
     }
 
     /**
@@ -40,13 +45,22 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'name' => 'required|max:255',
-            'price' => 'required|numeric',
-            'photo' => 'image|file|max:2048'
+            'category_id' => 'required',
+            'nama' => 'required|max:255',
+            'harga' => 'required|numeric',
+            'foto' => 'image|file|max:2048',
+            'thumbnail' => 'nullable',
+            'bahan_baku' => 'nullable|max:255',
+            'panjang' => 'nullable|numeric',
+            'lebar' => 'nullable|numeric',
+            'berat' => 'nullable|numeric',
+            'ketebalan' => 'nullable|numeric',
+            'jarak_reng' => 'nullable|numeric',
+            'volume' => 'nullable|numeric',
         ]);
 
-        if ($request->file('photo')) {
-            $validateData['photo'] = $request->file('photo')->store('product-images');
+        if ($request->file('foto')) {
+            $validateData['foto'] = $request->file('foto')->store('product-images');
         }
 
         Product::create($validateData);
@@ -57,12 +71,12 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Product  $produk
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Product $produk)
     {
-        //
+        return $produk;
     }
 
     /**
@@ -71,10 +85,11 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Product $produk)
     {
         return view('admin.dashboard.produk.edit', [
-            'product' => $product
+            'product' => $produk,
+            'categories' => ProductCategory::all()
         ]);
     }
 
@@ -82,22 +97,50 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Product  $produk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Product $produk)
     {
-        //
+        $validateData = $request->validate([
+            'category_id' => 'required',
+            'nama' => 'required|max:255',
+            'harga' => 'required|numeric',
+            'foto' => 'image|file|max:2048',
+            'bahan_baku' => 'nullable|max:255',
+            'panjang' => 'nullable|numeric',
+            'lebar' => 'nullable|numeric',
+            'berat' => 'nullable|numeric',
+            'ketebalan' => 'nullable|numeric',
+            'jarak_reng' => 'nullable|numeric',
+            'volume' => 'nullable|numeric',
+        ]);
+
+        if ($request->file('foto')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validateData['foto'] = $request->file('foto')->store('product-images');
+        }
+
+        Product::where('id', $produk->id)->update($validateData);
+
+        return redirect('/dashboard/produk')->with('success', 'Produk berhasil di-update!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Product  $produk
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Product $produk)
     {
-        //
+        if ($produk->foto) {
+            Storage::delete($produk->foto);
+        }
+
+        Product::destroy($produk->id);
+        return redirect('/dashboard/produk')->with('success', 'Produk berhasil dihapus!');
     }
 }

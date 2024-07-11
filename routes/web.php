@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResgiterController;
+use App\Http\Controllers\SettingController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +25,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', function () {
-    return view('homepage.index');
+    return view('homepage.index', [
+        'products' => Product::with('category')->get()
+    ]);
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
@@ -35,3 +40,5 @@ Route::post('/register', [ResgiterController::class, 'store']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::resource('/dashboard/produk', ProductController::class)->middleware('auth');
+Route::resource('/dashboard/kategori', ProductCategoryController::class)->middleware('auth');
+Route::resource('/dashboard/setting', SettingController::class)->middleware('auth');

@@ -2,23 +2,198 @@
 
 @section('admin-content')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Produk</h1>
+  <h1 class="h3 mb-0 text-gray-800">Edit Produk</h1>
 </div>
 <div class="row">
-  @foreach ($products as $item)
-    <div class="col-lg-3">
-      <div class="card">
-        <img src="{{ asset('img/produk/'.$item->photo) }}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title text-capitalize">{{ $item->name }}</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <div class="d-flex justify-content-between">
-            <a class="btn btn-primary" href="/dashboard/produk/{{ $item->id }}">Edit</a>
-            <button class="btn btn-danger">Hapus</button>
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <form method="post" action="/dashboard/produk/{{ $product->id }}" enctype="multipart/form-data">
+        @method('put')
+        @csrf
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="form-group mb-3">
+                <label for="nama">Nama</label>
+                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror"
+                id="nama" value="{{ old('nama', $product->nama) }}" required>
+                @error('nama')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group mb-3">
+                <label for="harga">Harga</label>
+                <input type="number" step="any" name="harga" class="form-control @error('harga') is-invalid @enderror"
+                id="harga" value="{{ old('harga', $product->harga) }}" required>
+                @error('harga')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+            </div>
+            {{-- <div class="col-lg-6">
+              <div class="input-group mb-3">
+                <div class="custom-file">
+                  <input type="file" class="form-control-file" id="customFile">
+                  <label class="custom-file-label" for="customFile">Pilih Foto</label>
+                </div>
+              </div>
+            </div> --}}
+            <div class="col-lg-3">
+              <div class="form-group mb-3">
+                <label for="bahanBaku">Bahan Baku</label>
+                <div class="input-group">
+                  <input type="text" name="bahan_baku" class="form-control @error('bahan_baku') is-invalid @enderror"
+                  id="bahanBaku" value="{{ old('bahan_baku', $product->bahan_baku) }}">
+                  @error('bahan_baku')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+              </div>
+            </div>
+              <div class="col-lg-3">
+                <div class="form-group mb-3">
+                  <label for="kategori">Kategori</label>
+                  <select class="custom-select" id="kategori" name="category_id" required>
+                    @foreach ($categories as $category)
+                      @if (old('category_id', $product->category_id) == $category->id)
+                        <option selected value="{{ $category->id }}">{{ $category->nama }}</option>
+                      @else
+                        <option value="{{ $category->id }}">{{ $category->nama }}</option>
+                      @endif
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+            <div class="col-lg-2">
+              <div class="form-group mb-3">
+                <label for="panjang">Panjang</label>
+                <div class="input-group">
+                  <input type="number" step="any" name="panjang" class="form-control @error('panjang') is-invalid @enderror"
+                  id="panjang" value="{{ old('panjang', $product->panjang) }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">cm</div>
+                  </div>
+                  @error('panjang')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div class="form-group mb-3">
+                <label for="lebar">Lebar</label>
+                <div class="input-group">
+                  <input type="number" step="any" name="lebar" class="form-control @error('lebar') is-invalid @enderror"
+                  id="lebar" value="{{ old('lebar', $product->lebar) }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">cm</div>
+                  </div>
+                  @error('lebar')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div class="form-group mb-3">
+                <label for="berat">Berat</label>
+                <div class="input-group">
+                  <input type="number" step="any" name="berat" class="form-control @error('berat') is-invalid @enderror"
+                  id="berat" value="{{ old('berat', $product->berat) }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">kg</div>
+                  </div>
+                  @error('berat')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div class="form-group mb-3">
+                <label for="ketebalan">Ketebalan</label>
+                <div class="input-group">
+                  <input type="number" step="any" name="ketebalan" class="form-control @error('ketebalan') is-invalid @enderror"
+                  id="ketebalan" value="{{ old('ketebalan', $product->ketebalan) }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">cm</div>
+                  </div>
+                  @error('ketebalan')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div class="form-group mb-3">
+                <label for="jarak_reng">Jarak Reng</label>
+                <div class="input-group">
+                  <input type="number" step="any" name="jarak_reng" class="form-control @error('jarak_reng') is-invalid @enderror"
+                  id="jarak_reng" value="{{ old('jarak_reng', $product->jarak_reng) }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">cm</div>
+                  </div>
+                  @error('jarak_reng')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div class="form-group mb-3">
+                <label for="volume">Volume</label>
+                <div class="input-group">
+                  <input type="number" step="any" name="volume" class="form-control @error('volume') is-invalid @enderror"
+                  id="volume" value="{{ old('volume', $product->volume) }}">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">pcs/m<sup>2</sup></div>
+                  </div>
+                  @error('volume')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <label for="photo">Foto Produk</label>
+              <input type="hidden" name="oldImage" value="{{ $product->foto }}">
+              <input type="file" name="foto" class="custom-control" id="photo" onchange="previewImage()">
+              @error('photo')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
+              @if ($product->foto)
+                <img src="{{ asset('storage/' . $product->foto) }}" class="img-preview img-fluid my-3 col-sm-5">
+              @else
+                <img class="img-preview img-fluid my-3 col-sm-5">
+              @endif
+            </div>
           </div>
-        </div>
+          <button type="submit" class="btn btn-primary">Tambah Produk</button>
+        </form>
       </div>
     </div>
-  @endforeach
+  </div>
 </div>
 @endsection

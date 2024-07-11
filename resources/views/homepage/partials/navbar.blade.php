@@ -11,6 +11,9 @@
           <li><a class="nav-link scrollto" href="#about">Tentang Kami</a></li>
           <li><a class="nav-link scrollto " href="#produk">Produk</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
+          @auth
+          	<li><a class="nav-link scrollto" href="/dashboard">Dashboard</a></li>
+          @endauth
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>

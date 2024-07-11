@@ -15,10 +15,17 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('price');
-            $table->text('photo');
-            $table->text('thumbnail');
+            $table->foreignId('category_id')->constrained('product_categories')->cascadeOnDelete();
+            $table->string('nama');
+            $table->integer('harga');
+            $table->text('foto');
+            $table->string('bahan_baku')->nullable();
+            $table->double('panjang')->nullable();
+            $table->double('lebar')->nullable();
+            $table->double('ketebalan')->nullable();
+            $table->double('berat')->nullable();
+            $table->double('jarak_reng')->nullable();
+            $table->double('volume')->nullable();
             $table->timestamps();
         });
     }

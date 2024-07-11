@@ -41,62 +41,22 @@
 			</div>
 
 			<div class="row produk-container">
-				<div class="col-lg-4 col-md-6 produk-item filter-morando wow fadeInUp" data-wow-delay="0.1s">
-					<div class="produk-wrap text-center">
-						<a href="morando-detail.html" class="link-details" title="Lihat Detail">
-							<figure>
-								<img src="img/produk/morando-biru.jpg" class="img-fluid" alt="">
-							</figure>
-						</a>
+              @foreach ($products as $product)
+                <div class="col-lg-4 col-md-6 produk-item filter-morando wow fadeInUp" data-wow-delay="0.1s">
+                  <div class="produk-wrap text-center">
+                    <a href="morando-detail.html" class="link-details" title="Lihat Detail">
+                      <figure>
+                        <img src="{{ asset('storage/' . $product->foto) }}" class="img-fluid" alt="">
+                      </figure>
+                    </a>
 
-						<div class="produk-info">
-							<h4><a href="morando-detail.html">Morando Glazur Biru</a></h4>
-							<p>Rp9.000</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6 produk-item filter-morando wow fadeInUp" data-wow-delay="0.2s">
-					<div class="produk-wrap text-center">
-						<a href="morando-detail.html" class="link-details" title="Lihat Detail">
-							<figure>
-								<img src="img/produk/morando-transparan-baru.jpg" class="img-fluid" alt="">
-							</figure>
-						</a>
-						<div class="produk-info">
-							<h4><a href="morando-detail.html">Morando Transparan</a></h4>
-							<p>Rp4.700</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6 produk-item filter-morando wow fadeInUp" data-wow-delay="0.2s">
-					<div class="produk-wrap text-center">
-						<a href="morando-detail.html" class="link-details" title="Lihat Detail">
-							<figure>
-								<img src="img/produk/morando-hijau.jpg" class="img-fluid" alt="">
-							</figure>
-						</a>
-						<div class="produk-info">
-							<h4><a href="morando-detail.html">Morando Glazur Hijau</a></h4>
-							<p>Rp8.500</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6 produk-item filter-morando wow fadeInUp" data-wow-delay="0.2s">
-					<div class="produk-wrap text-center">
-						<a href="morando-detail.html" class="link-details" title="Lihat Detail">
-							<figure>
-								<img src="img/produk/morando-coklat.jpg" class="img-fluid" alt="">
-							</figure>
-						</a>
-						<div class="produk-info">
-							<h4><a href="morando-detail.html">Morando Glazur Coklat</a></h4>
-							<p>Rp5.000</p>
-						</div>
-					</div>
-				</div>
+                    <div class="produk-info">
+                      <h4><a href="morando-detail.html">{{ $product->nama }}</a></h4>
+                      <p>Rp{{ $product->harga }}</p>
+                    </div>
+                  </div>
+                </div>
+              @endforeach
 			</div>
 		</div>
 	</section><!-- End produk Section -->
