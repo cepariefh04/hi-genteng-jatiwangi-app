@@ -2,7 +2,7 @@
     <div class="container d-flex align-items-center">
 
       <div class="logo me-auto">
-        <a href="index.html"><img src="img/logo-baru.png" alt="" class="img-fluid"></a>
+        <a href="index.html"><img src="{{ asset('storage/'. $settings[0]->navbar_logo) }}" alt="" class="img-fluid"></a>
       </div>
 
       <nav id="navbar" class="navbar order-last order-lg-0">

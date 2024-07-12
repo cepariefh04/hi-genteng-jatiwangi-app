@@ -13,16 +13,16 @@
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item">
-			<a class="nav-link" href="/">
-				<i class="fas fa-fw fa-home"></i>
-				<span>Home Page</span></a>
-		</li>
-		<div class="sidebar-heading">Settings</div>
-		<li class="nav-item">
-			<a class="nav-link" href="/dashboard/setting">
-				<i class="fas fa-fw fa-wrench"></i>
-				<span>Setting Aplikasi</span></a>
-		</li>
+      <a class="nav-link" href="/">
+        <i class="fas fa-fw fa-home"></i>
+        <span>Home Page</span></a>
+    </li>
+    <div class="sidebar-heading">Settings</div>
+    <li class="nav-item {{ Request::is('dashboard/setting*') ? 'active' : '' }}">
+      <a class="nav-link" href="/dashboard/setting">
+        <i class="fas fa-fw fa-wrench"></i>
+        <span>Setting Aplikasi</span></a>
+    </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item {{ Request::is('dashboard/produk*') ? 'active' : '' }}">

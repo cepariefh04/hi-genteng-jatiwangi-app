@@ -30,7 +30,7 @@
         </div>
         @endif
 
-				@if (session()->has('loginError'))
+		@if (session()->has('loginError'))
         <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
           {{ session('loginError') }}
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">

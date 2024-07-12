@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResgiterController;
 use App\Http\Controllers\SettingController;
 use App\Models\Product;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('homepage.index', [
-        'products' => Product::with('category')->get()
+        'products' => Product::with('category')->get(),
+        'settings' => Setting::get(),
+        'title' => 'Home'
     ]);
 });
 

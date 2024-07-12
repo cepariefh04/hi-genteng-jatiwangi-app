@@ -183,6 +183,13 @@
               @enderror
               <img src="" alt="" class="img-preview img-fluid my-3 col-sm-5">
             </div>
+            <div class="col-lg-12">
+              <div class="form-group mb-3">
+                <label for="tentang_kami">Tes</label>
+                <input id="tes" type="hidden" name="tes">
+                <trix-editor input="tes"></trix-editor>
+              </div>
+            </div>
           </div>
           <button type="submit" class="btn btn-primary">Tambah Produk</button>
         </form>

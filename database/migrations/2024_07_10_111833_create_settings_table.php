@@ -19,12 +19,13 @@ class CreateSettingsTable extends Migration
             $table->text('navbar_logo');
             $table->text('hero');
             $table->string('slogan');
-            $table->json('tentang_kami');
+            $table->longText('tentang_kami');
+            $table->text('foto_tentang_kami');
             $table->string('alamat');
             $table->string('instagram');
             $table->string('email')->unique();
-            $table->integer('no_telpon');
-            $table->string('link_gmaps');
+            $table->bigInteger('no_telepon');
+            $table->string('link_gmaps', 500);
             $table->timestamps();
         });
     }
