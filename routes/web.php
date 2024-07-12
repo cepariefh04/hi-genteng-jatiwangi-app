@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
@@ -32,6 +33,9 @@ Route::get('/', function () {
         'title' => 'Home'
     ]);
 });
+
+Route::get('/detail-produk', [HomeController::class, 'index']);
+Route::get('/detail-produk/{id}', [HomeController::class, 'detail']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);

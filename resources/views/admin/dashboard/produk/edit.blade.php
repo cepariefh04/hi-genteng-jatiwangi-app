@@ -6,7 +6,7 @@
 </div>
 <div class="row">
   <div class="col-lg-12">
-    <div class="card">
+    <div class="card shadow">
       <div class="card-body">
         <form method="post" action="/dashboard/produk/{{ $product->id }}" enctype="multipart/form-data">
         @method('put')
@@ -190,7 +190,9 @@
               @endif
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Tambah Produk</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i>&nbsp;Simpan
+          </button>
         </form>
       </div>
     </div>

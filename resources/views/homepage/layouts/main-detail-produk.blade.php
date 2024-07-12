@@ -22,10 +22,8 @@
 
 <body>
   @include('homepage.partials.navbar')
-  @include('homepage.partials.hero')
-
   <main id="main">
-		@yield('content')
+    @yield('content')
   </main>
 
   @include('homepage.partials.footer')

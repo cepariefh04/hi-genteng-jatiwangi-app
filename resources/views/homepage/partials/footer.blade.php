@@ -7,7 +7,7 @@
           <i class="bi bi-geo-alt icon"></i>
           <div class="address">
             <h4>Alamat</h4>
-            <p>JL. Burujul Wetan Kec. Jatiwangi<br>Kab. Majalengka Jawa Barat 45454</p>
+            <p>{{ $settings[0]->alamat }}</p>
             <p></p>
           </div>
 
@@ -20,13 +20,17 @@
             <p>
               <strong>Whatsapp:</strong>
               <span>
-                <a href="https://api.whatsapp.com/send?phone=6282111555777" style="text-decoration: none;" class="float" target="_blank">
-                082111555777
+                <a href="https://api.whatsapp.com/send?phone=62{{ $settings[0]->no_telepon }}" style="text-decoration: none;" class="float" target="_blank">
+                  +62{{ $settings[0]->no_telepon }}
+                </a>
+              </span>
+              <br>
+              <strong>Instagram:</strong>
+              <a href="https://www.instagram.com/{{ $settings[0]->instagram }}" style="text-decoration: none;" class="float" target="_blank">
+                {{ $settings[0]->instagram }}
               </a>
-            </span>
-            <br>
               <strong>Email:</strong>
-              <span>yudhie.hi@gmail.com</span><br>
+              <span>{{ $settings[0]->email }}</span><br>
             </p>
           </div>
         </div>

@@ -1,17 +1,17 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard/setting">
       <div class="sidebar-brand-icon">
         <i class="fas fa-home"></i>
       </div>
       <div class="sidebar-brand-text mx-3">HI - Admin</div>
     </a>
     <hr class="sidebar-divider my-0">
-    <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
+    {{-- <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
       <a class="nav-link" href="/dashboard">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
     </li>
-    <hr class="sidebar-divider">
+    <hr class="sidebar-divider"> --}}
     <li class="nav-item">
       <a class="nav-link" href="/">
         <i class="fas fa-fw fa-home"></i>

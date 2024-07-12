@@ -16,6 +16,7 @@ class SettingController extends Controller
     public function index()
     {
         return view('admin.dashboard.setting.index', [
+            'title' => 'Setting',
             'settings' => Setting::all()
         ]);
     }
@@ -49,9 +50,10 @@ class SettingController extends Controller
      */
     public function show(Setting $setting)
     {
-        return view('admin.dashboard.setting.index', [
-            'settings' => $setting
-        ]);
+        // return view('admin.dashboard.setting.index', [
+
+        //     'settings' => $setting
+        // ]);
     }
 
     /**

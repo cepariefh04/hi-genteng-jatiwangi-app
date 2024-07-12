@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class ProductCategoryController extends Controller
@@ -17,6 +18,8 @@ class ProductCategoryController extends Controller
     {
         $categories = ProductCategory::all();
         return view('admin.dashboard.kategori.index', [
+            'settings' => Setting::get(),
+            'title' => 'Kategori Produk',
             'categories' => $categories
         ]);
     }

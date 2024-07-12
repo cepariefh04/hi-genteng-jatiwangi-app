@@ -21,7 +21,7 @@
   <div class="row">
     {{-- HEADER SECTION --}}
     <div class="col-lg-6">
-      <div class="card">
+      <div class="card shadow">
         <div class="card-header bg-primary text-white">
           <h4>Bagian Header</h4>
         </div>
@@ -133,7 +133,7 @@
     </div>
     {{-- CONTACT SECTION --}}
     <div class="col-lg-6">
-      <div class="card">
+      <div class="card shadow">
         <div class="card-header bg-primary text-white">
           <h4>Bagian Kontak</h4>
         </div>
@@ -209,7 +209,7 @@
     </div>
     {{-- ABOUT US SECTION --}}
     <div class="col-lg-12 mt-3">
-      <div class="card">
+      <div class="card shadow">
         <div class="card-header bg-primary text-white">
           <h4>Bagian Tentang Kami</h4>
         </div>
@@ -252,14 +252,14 @@
     </div>
   </div>
 </div>
-<div class="row">
+<div class="row mt-3">
   <div class="col-lg-12">
-    <div class="card">
+    <div class="card shadow">
       <div class="card-header bg-secondary text-white">
         <h4>Preview Aplikasi</h4>
       </div>
       <div class="card-body">
-        <iframe src="http://127.0.0.1:8000/" frameborder="0" class="preview-homepage"></iframe>
+        <iframe src="{{ env('APP_URL') }}" frameborder="0" class="preview-homepage"></iframe>
       </div>
     </div>
   </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,6 +21,8 @@ class ProductController extends Controller
         $products = Product::with('category')->get();
 
         return view('admin.dashboard.produk.index', [
+            'settings' => Setting::get(),
+            'title' => 'Produk',
             'products' => $products
         ]);
     }
@@ -32,6 +35,8 @@ class ProductController extends Controller
     public function create()
     {
         return view('admin.dashboard.produk.create', [
+            'settings' => Setting::get(),
+            'title' => 'Produk',
             'categories' => ProductCategory::all()
         ]);
     }
@@ -88,6 +93,8 @@ class ProductController extends Controller
     public function edit(Product $produk)
     {
         return view('admin.dashboard.produk.edit', [
+            'settings' => Setting::get(),
+            'title' => 'Produk',
             'product' => $produk,
             'categories' => ProductCategory::all()
         ]);
@@ -142,5 +149,10 @@ class ProductController extends Controller
 
         Product::destroy($produk->id);
         return redirect('/dashboard/produk')->with('success', 'Produk berhasil dihapus!');
+    }
+
+    public function detailProduk(Product $produk)
+    {
+        return view('homepage.detail-produk');
     }
 }

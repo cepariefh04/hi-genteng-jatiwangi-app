@@ -1,37 +1,51 @@
 @extends('admin.layouts.main')
 
 @section('admin-content')
+@if (session()->has('success'))
+<div id="alert" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+  {{ session('success') }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@endif
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Daftar Kategori</h1>
-    <button class="btn btn-success" data-toggle="modal" data-target="#modalTambah">
+    <button class="btn btn-primary" data-toggle="modal" data-target="#modalTambah">
       <i class="fas fa-plus"></i> Tambah Kategori
     </button>
   </div>
-  <div class="card">
-    <div class="card-body">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">No</th>
-            <th scope="col">Nama</th>
-            <th scope="col">Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($categories as $category)
-          <tr>
-            <td width="50">{{ $loop->iteration }}</td>
-            <td>{{ $category->nama }}</td>
-            <td width="120">
-              <button class="btn btn-small btn-warning" data-toggle="modal" data-target="#modalEdit-{{ $category->id }}"><i class="fas fa-edit"></i></button>
-              <button class="btn btn-small btn-danger" data-toggle="modal" data-target="#modalDelete-{{ $category->id }}"><i class="fas fa-trash"></i></button>
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
+  @if ($categories == '[]')
+    <div class="alert alert-danger text-center" role="alert">
+      Belum ada Kategori Produk, tambahkan Kategori Produk terlebih dahulu!
     </div>
-  </div>
+  @else
+    <div class="card shadow">
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Nama</th>
+              <th scope="col">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($categories as $category)
+            <tr>
+              <td width="50">{{ $loop->iteration }}</td>
+              <td>{{ $category->nama }}</td>
+              <td width="120">
+                <button class="btn btn-small btn-warning" data-toggle="modal" data-target="#modalEdit-{{ $category->id }}"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-small btn-danger" data-toggle="modal" data-target="#modalDelete-{{ $category->id }}"><i class="fas fa-trash"></i></button>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+  @endif
   @foreach ($categories as $category)
     {{-- MODAL EDIT --}}
     <div class="modal fade" id="modalEdit-{{ $category->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,7 +74,9 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn-warning">Edit</button>
+              <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i>&nbsp;Simpan
+              </button>
             </div>
           </form>
         </div>
@@ -88,7 +104,9 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn-danger">Hapus</button>
+              <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash"></i>&nbsp;Hapus
+              </button>
             </div>
           </form>
         </div>

@@ -14,13 +14,18 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <style>
+    .row{
+      height: 86vh;
+    }
+  </style>
 </head>
 
 <body class="bg-gradient-primary">
-  <div class="container">
+  <div class="container-fluid">
     <!-- Outer Row -->
     <div class="row justify-content-center">
-      <div class="col-xl-6 col-lg-6 col-md-6">
+      <div class="col-xl-10 col-lg-12 col-md-9">
         @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
           {{ session('success') }}
@@ -42,10 +47,12 @@
           <div class="card-body p-0">
               <!-- Nested Row within Card Body -->
             <div class="row">
-              <div class="col-lg-12">
+                <div class="col-lg-6 d-none d-lg-block" style="background: url('{{ asset('img/login.png') }}') center center / cover;"></div>
+              <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Selamat Datang, Admin</h1>
+                    <h5 class="h5 text-gray-500 mb-4">Silahkan Login untuk masuk ke halaman Dashboard</h3>
                   </div>
                   <form action="/login" method="post" class="user">
                     @csrf

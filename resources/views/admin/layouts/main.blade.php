@@ -8,7 +8,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>HI Admin - Dashboard</title>
+  <title>HI Admin - {{ $title }}</title>
+  <link href="{{$settings[0]->title_logo ? asset('storage/' . $settings[0]->title_logo) : asset('img/logo-hi-baru.png') }}" rel="icon">
   <!-- Custom fonts for this template-->
   <link href="{{ asset('vendor/sb-admin/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -93,17 +94,6 @@
     <script src="{{ asset('vendor/sb-admin/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
     <script>
-      function formatRupiah(angka) {
-        if (angka != null) {
-          return 'Rp' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-        }
-        return '';
-      }
-      var hargaElement = document.getElementById('harga');
-      var harga = hargaElement.dataset.harga;
-
-      hargaElement.textContent = formatRupiah(harga);
-
       function previewImage() {
         const image = document.querySelector('#photo');
         const imgPreview = document.querySelector('.img-preview');
@@ -168,6 +158,16 @@
           imgPreview.src = oFREvent.target.result;
         }
       }
+
+
+        var alertSuccess = document.querySelector('#alert');
+        console.log(alertSuccess);
+        if (alertSuccess) {
+          setTimeout(function() {
+          alertSuccess.remove()
+          }, 5000)
+        }
+
     </script>
 </body>
 </html>
