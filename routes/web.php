@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExecuteArtisanCommandController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductCategoryController;
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
+Route::get('/run-command/{command}', ExecuteArtisanCommandController::class);
 Route::get('/', function () {
     return view('homepage.index', [
         'products' => Product::with('category')->get(),
